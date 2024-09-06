@@ -1,0 +1,31 @@
+<section class="bg-main-light rounded-4 shadow my-2 p-2 w-75 mx-auto">
+    <h1 class="text-center">ShippingAddress</h1>
+    <form [formGroup]="orders"(ngSubmit)="ordersSubmit()" >
+        <div class="my-2">
+            <label for="details">Details</label>
+            <textarea formControlName="details" id="details" class="form-control" placeholder="more details .................."></textarea>
+        </div>
+        <div class="my-2">
+            <label for="phone">Phone</label>
+            <input [ngClass]="{
+                'is-invalid': orders.get('phone')?.errors && (orders.get('phone')?.touched || orders.get('phone')?.dirty ),
+                'is-valid': !orders.get('phone')?.errors && (orders.get('phone')?.touched || orders.get('phone')?.dirty )
+            }" class="form-control" id="phone" type="tel" formControlName="phone">
+            @if (orders.get('phone')?.errors && (orders.get('phone')?.touched || orders.get('phone')?.dirty )) {
+                <div class="alert alert-danger w-50">
+                   @if (orders.get('phone')?.getError('required')) {
+                    <p class="m-0">phone Is Required</p>
+                   }@else if (orders.get('phone')?.getError('pattern')) {
+                    <p class="m-0">Enter Valid phone</p>
+                   }
+                </div>
+            }
+        </div>
+        <div class="my-2">
+            <label for="city">City</label>
+            <input formControlName="city" id="city" class="form-control">
+        </div>
+    <button [disabled]="orders.invalid" class="btn-main" type="submit">Check Out</button>
+
+    </form>
+</section>

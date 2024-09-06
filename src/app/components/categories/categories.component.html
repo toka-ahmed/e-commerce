@@ -1,0 +1,24 @@
+<section class="my-2 pb-3">
+    <h2 class="text-center text-main m-3">All Categories</h2>
+    <div class="container">
+
+   
+ <div class="row g-4">
+    @for (cat of categoriesList; track cat._id) {
+<div class="col-lg-4 col-md-6 col-sm-12 text-center">
+    <div class="card">
+        <div class="card-img">
+            <img class="img-fluid ratio-4x3 w-100" [src]="cat.image" style="height: 300px;" [alt]="cat.name">
+        </div>
+        <div class="card-body">
+            <p class="text-success h3 text-center">{{cat.name}}</p>
+        </div>
+    </div>
+   
+
+</div>
+       
+    }
+ </div>
+</div>
+</section>

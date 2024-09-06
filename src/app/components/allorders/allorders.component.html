@@ -1,0 +1,52 @@
+<section>
+    <div class="container pb-4 ">
+        <div>
+            <h1 class="text-main m-4">All My Orders</h1>
+        </div>
+      <div class="row g-3">
+        @for (order of allOrderHave; track $index) {
+            @for (item of order.cartItems; track $index) {
+                <div class="col-md-4 col-lg-2">
+                    <div class="card product p-2">
+                        <img [src]="item.product.imageCover" class="w-100" [alt]="item.product.title">
+                        <h3 class="small text-main mt-1">{{item.product.category.name}}</h3>
+                        <h4 class=" h6">{{item.product.brand.name}}</h4>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span>count : {{item.count}} </span>
+                            <div>
+                                @for (num of [1,2,3,4,5].slice(0 , item.product.ratingsAverage); track $index) {
+                                    <span><i class="fas fa-star rating-color"></i></span>
+                                }
+                                @if (item.product.ratingsAverage %1 !==0) {
+                                    <span><i class="fas fa-star-half-alt rating-color"></i></span>
+                                }
+                                <span class="text-muted">{{item.product.ratingsAverage}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+      </div>
+            
+        
+    </div>
+   
+
+</section>
+
+
+<!-- <div class="row shadow my-3 d-flex align-items-center p-2">
+    <div class="col-md-2">
+        <img src="" alt="">
+    </div>
+    <div class="col-md-10 d-flex justify-content-between">
+        <div>
+           
+        </div>
+        <div>
+          
+        </div>
+    </div>
+
+</div> -->

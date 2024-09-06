@@ -1,0 +1,18 @@
+{
+    "navbar":{
+        "home":"الرـيسية",
+        "products":"المنتجات",
+        "categories":"الأقسام",
+        "brands":"العلامات التجارية",
+        "signout":"تسجيل الخروج",
+        "lang":"ع",
+        "wishlist":"المفضلة"
+        
+    }
+    ,
+    "home":{
+        "popular categories":"الأقسام الشائعة",
+        "popular products":"المنتجات الشائعة"
+        
+    }
+}

@@ -1,0 +1,96 @@
+<div class="container-fluid pb-5">
+
+    <section claass="my-2">
+        <div class="container w-50">
+           <div class="row g-0">
+              <div class="col-md-6">
+                 <div>
+     
+                    <owl-carousel-o [options]="customOptionsMain">
+                       <ng-template carouselSlide>
+                          <img src="./assets/images/41nN4nvKaAL._AC_SY200_.jpg" class="w-100 " height="360px" alt="">
+                       </ng-template>
+                       <ng-template carouselSlide>
+                          <img src="../../../assets/images/61cSNgtEISL._AC_SY200_.jpg" class="w-100 " height="360px" alt="">
+                       </ng-template>
+                       <ng-template carouselSlide>
+                          <img src="../../../assets/images/XCM_Manual_1396328_4379574_Egypt_EG_BAU_GW_DC_SL_Jewelry_379x304_1X._SY304_CB650636675_.jpg" class="w-100 " height="360px" alt="">
+                       </ng-template>
+     
+                    </owl-carousel-o>
+     
+                 </div>
+              </div>
+              <div class="col-md-4">
+                 <div>
+                    <img src="../../../assets/images/XCM_Manual_1533480_5305769_379x304_1X._SY304_CB616236518_.jpg" class="w-100" height="210px" alt="">
+     
+                    <img src="../../../assets/images/XCM_Manual_1396328_4379575_Egypt_EG_BAU_GW_DC_SL_Bags_Wallets_379x304_1X._SY304_CB650636675_.jpg" class="w-100" height="210px" alt="">
+     
+                 </div>
+              </div>
+           </div>
+        </div>
+     
+     </section>
+
+
+<!-- categories -->
+<section class="my-2">
+    
+    <owl-carousel-o [options]="customOptionsCat">
+@for (cat of categoriesList; track cat._id) {
+    <ng-template carouselSlide >
+        <div>
+            <img [src]="cat.image" class="w100" height="270px" [alt]="cat.name">
+            <h3 class="h6 text-main">{{cat.name}}</h3>
+        </div>
+      </ng-template>
+}
+    
+      </owl-carousel-o>
+</section>
+
+
+
+<input [(ngModel)]="text" type="search" placeholder="Search By Name" class="form-control w-50 mx-auto my-3">
+
+<!-- product -->
+
+<section class="my-3 p-3">
+   
+    <div class="row g-4">
+     @for (product of productList.slice(0,12)| search :text; track product.id) {
+        <div class="col-lg-3 col-md-4 col-sm-12">
+            
+            <div class="product p-2 cr position-relative">
+
+                <div [routerLink]="['/details', product.id]">
+                    <img [src]="product.imageCover" class="w-100" [alt]="product.title">
+                <h3 class="small text-main">{{product.category.name}}</h3>
+                
+                <h4 class="h6">{{product.title| split : 2}}</h4>
+                <div class="d-flex justify-content-between align-items-center">
+                    <span>{{product.price | currency : 'EGP'}} </span>
+                    <div>
+                        @for (num of [1,2,3,4,5].slice(0 , product.ratingsAverage); track $index) {
+                            <span><i class="fas fa-star rating-color"></i></span>
+                        }
+                        @if (product.ratingsAverage %1 !==0) {
+                            <span><i class="fas fa-star-half-alt rating-color"></i></span>
+                        }
+                        <span class="text-muted">{{product.ratingsAverage}}</span>
+                    </div>
+                </div>
+                </div>
+                <button (click)="addWishList(product.id)" class="wishlist-icon position-absolute top-0 end-0 border-0 bg-transparent p-2">
+                    <i class="fa-solid fa-heart fa-2xl icon1" [ngClass]="{'text-danger': wishlist.has(product.id), 'text-muted': !wishlist.has(product.id)}"></i>
+                  </button>
+
+                <button class="btn btn-main w-100" (click)="addCart(product.id)">Add To Chart</button>
+            </div>
+        </div>
+     }
+    </div>
+</section>
+</div>

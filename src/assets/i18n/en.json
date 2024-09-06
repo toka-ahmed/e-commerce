@@ -1,0 +1,18 @@
+{
+    "navbar":{
+        "home":"Home",
+        "products":"Products",
+        "categories":"Categories",
+        "brands":"Brands",
+        "signout":"SignOut",
+        "lang":"EN",
+        "wishlist":"WishList"
+
+    }
+   ,
+    "home":{
+        "popular categories":"Popular Categories",
+        "popular products":"Popular Categories"
+        
+    }
+}

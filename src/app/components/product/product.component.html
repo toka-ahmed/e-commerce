@@ -1,0 +1,39 @@
+<input [(ngModel)]="text" type="search" placeholder="Search By Name" class="form-control w-50 mx-auto my-2">
+
+<section class="pb-5">
+    <h2 class="text-center text-main m-3">Popular Products</h2>
+    <div class="container">
+
+        <div class="row g-4">
+            @for (product of allProduct | search :text; track product.id) {
+              <div class="col-lg-3 col-md-6 col-sm-12">
+                <div class="product p-2 position-relative">
+                  <div [routerLink]="['/details', product.id]">
+                    <img [src]="product.imageCover" class="w-100" [alt]="product.title">
+                    <h3 class="small text-main">{{product.category.name}}</h3>
+                    <h4 class="h6">{{product.title | split : 2}}</h4>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <span>{{product.price | currency : 'EGP'}}</span>
+                      <div>
+                        @for (num of [1, 2, 3, 4, 5].slice(0, product.ratingsAverage); track $index) {
+                          <span><i class="fas fa-star rating-color"></i></span>
+                        }
+                        @if (product.ratingsAverage % 1 !== 0) {
+                          <span><i class="fas fa-star-half-alt rating-color"></i></span>
+                        }
+                        <span class="text-muted">{{product.ratingsAverage}}</span>
+                      </div>
+                    </div>
+                  </div>
+                  <button (click)="addWishList(product.id)" class="wishlist-icon position-absolute top-0 end-0 border-0 bg-transparent p-2">
+                    <i class="fa-solid fa-heart fa-2xl icon1" [ngClass]="{'text-danger': wishlist.has(product.id), 'text-muted': !wishlist.has(product.id)}"></i>
+                  </button>
+                  <button class="btn btn-main w-100" (click)="addCart(product.id)">Add To Cart</button>
+                </div>
+              </div>
+            }
+          </div>
+          
+</div>
+
+</section>

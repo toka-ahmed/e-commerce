@@ -1,0 +1,52 @@
+
+<section class="bg-nain-light rounded-4 shadow p-4 my-2 w-75 mx-auto">
+    @if (cartNum > 0 ){
+
+    <div class="d-flex align-items-center justify-content-between">
+        <h2>Shop Cart</h2>
+            <button (click)="clearItems()" class="btn btn-outline-danger btn-sm">Clear Cart</button>
+        
+    </div>
+    }
+@if (clearMsg=='success'||cartNum ===0 || cartDetails.totalCartPrice === 0 ) {
+    <div class="text-center">
+        <img src="./assets/images/cartempty.avif" class="w-100" alt="">
+    </div>
+    }@else {
+    
+        <p class="text-main">Total Cart Price : {{cartDetails.totalCartPrice | currency : 'GBP'}}</p>
+
+        @for (item of cartDetails.products; track item.product.id) {
+            <div class="row mb-1 border-bottom " >
+                <div class="col-md-1 cr" [routerLink]="['/details', item.product.id]">
+                    <img [src]="item.product.imageCover" class="w-100" [alt]="item.product.title">
+                </div>
+                <div class="col-md-11 d-flex align-items-center justify-content-between">
+                    <div>
+                        <h3 class="h5">{{item.product.title}}</h3>
+                        <p class="text-main m-0">Price : {{item.price | currency : 'GBP'}}</p>
+                        <span (click)="deleteItem(item.product.id)" class="text-danger cr"><i class="fa-solid fa-trash"></i></span>
+                    </div>
+                    <div class="d-flex align-items-center gap-2">
+                        <a (click)="updateCount(item.product.id ,item.count + 1 )" class="text-main cr"><i class="fa-solid fa-circle-plus fa-2xl"></i></a>
+                        <span>{{item.count}}</span>
+                        <a [class.disabled]="item.count <= 1" 
+   (click)="item.count > 1 && updateCount(item.product.id, item.count - 1)" 
+   class="text-main cr">
+   <i class="fa-solid fa-circle-minus fa-2xl"></i>
+</a>
+        
+                    </div>
+        
+                </div>
+        
+            </div>
+        }
+        
+        @if (cartDetails.totalCartPrice > 0) {
+        <button [routerLink]="['/orders', cartDetails._id]" class="btn-main mt-2">Orders</button>
+        
+    }
+}
+   
+</section>
